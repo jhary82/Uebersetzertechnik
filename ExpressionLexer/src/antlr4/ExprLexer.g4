@@ -1,8 +1,7 @@
 lexer grammar ExprLexer;
 
 // Token definitions
-
-BINOP: '+' | '-' | '*' | '/' |  '^' ;
+BINOP: ('+' | '-' | '*' | '/' |  '^') ;
 UNAOP: '#';
 OPERAND: DIGIT+;
 NL: '\n';
@@ -10,7 +9,6 @@ NL: '\n';
 
 fragment DIGIT: [0-9];
 fragment LETTER: [a-zA-Z];
-
 
 //ignore
 IGNORE: ( LETTER+ | '.' ) -> skip;

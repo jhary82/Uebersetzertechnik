@@ -3,7 +3,6 @@
  */
 package postFix;
 
-import org.antlr.v4.parse.ANTLRLexer;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.Token;
 import stack.ListStack;

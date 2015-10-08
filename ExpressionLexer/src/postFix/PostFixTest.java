@@ -4,7 +4,7 @@
 package postFix;
 
 import static org.junit.Assert.*;
-import org.junit.*;
+import org.junit.Test;
 
 /**
  * @author Simon Krause
