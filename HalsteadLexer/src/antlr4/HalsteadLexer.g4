@@ -3,7 +3,7 @@ lexer grammar HalsteadLexer;
 // Token definitions
 OPERATOR: ( SCSPEC | TYPE_QUAL | RESERVED | STAT | OPERATORS ) ;
 OPERAND: ( TYPESPEC | IDENTIFIER | NUMBER | STRING | CHAR ) ;
-NL: '\n';
+IGNORE: ( COMMENT | SL_COMMENT | 'do' | ':' | ')' | '}' | ']' | HEADER_FILE | WHITESPACE | NL) -> skip;
 
 fragment NUMBER: ( INT ( '.' INT )? );
 fragment TYPESPEC: ( 'bool' | 'char' | 'double' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'unsigned' | 'void' );
@@ -19,8 +19,5 @@ fragment IDENTIFIER: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. '
 fragment COMMENT: ( '/*' ( . )*? '*/' );
 fragment SL_COMMENT:  ( '//' ( . )*? '\\n' );
 fragment HEADER_FILE: ( '#include' ( ' ' )+ '<' IDENTIFIER '.h>' );
-
-//ignore
-IGNORE: ( COMMENT | SL_COMMENT | 'do' | ':' | ')' | '}' | ']' | HEADER_FILE ) -> skip;
-WHITESPACE :(' '|'\t'|'\r') -> skip ;  
-
+fragment WHITESPACE :(' '|'\t'|'\r') ;   
+fragment NL: '\n';
