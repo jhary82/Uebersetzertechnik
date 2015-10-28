@@ -18,8 +18,9 @@ public class RecursiveDescentLexer extends Lexer {
 	public static int LBRACK = 8;
 	public static int RBRACK = 9;
 	public static int EQUALS = 10;
+	public static int NL = 11;
 	
-	public static String[] tokenNames =  { "n/a", "<EOF>", "ID", "INTEGER", "PLUS", "MINUS", "MULTI", "DIV", "LBRACK", "RBRACK", "EQUALS" };	
+	public static String[] tokenNames =  { "n/a", "<EOF>", "ID", "INTEGER", "PLUS", "MINUS", "MULTI", "DIV", "LBRACK", "RBRACK", "EQUALS", "NL" };	
 	
 	public RecursiveDescentLexer(String input) {
 		super(input);
@@ -30,11 +31,39 @@ public class RecursiveDescentLexer extends Lexer {
 	public Token nextToken() {
 		Token nextToken = null;
 		while( c!=EOF){
-			if( c == '+'){
+			if( c == ' ' || c=='\t' || c=='\r') {
+				WS();
+				continue;
+			}			
+			else if( c == '+'){
 				nextToken = PLUS();				
 			}
 			else if( isDIGIT() ){
-				nextToken = INTEGER("");
+				nextToken = INTEGER();
+			}
+			else if( isLETTER() ){
+				nextToken = ID();
+			}
+			else if( c == '-'){
+				nextToken = MINUS();
+			}
+			else if( c == '*' ){
+				nextToken = MULTI();
+			}
+			else if( c == '/'){
+				nextToken = DIV();
+			}
+			else if( c == '('){
+				nextToken = LBRACK();
+			}
+			else if( c == ')'){
+				nextToken = RBRACK();
+			}
+			else if( c == '='){
+				nextToken = EQUALS();
+			}		
+			else if( c == '\n'){
+				nextToken = NL();
 			}
 			
 			
@@ -46,6 +75,97 @@ public class RecursiveDescentLexer extends Lexer {
 			}
 		}
 		return new Token(EOF_TYPE,"<EOF>");
+	}
+
+	private Token NL() {
+		if( c == '\n' ){
+			consume();
+			return new Token(NL, "NL");
+		}
+		else{
+			return null;
+		}
+	}
+
+	private Token EQUALS() {
+		if( c == '=' ){
+			consume();
+			return new Token(EQUALS, "=");
+		}
+		else{
+			return null;
+		}
+	}
+
+	private Token RBRACK() {
+		if( c == ')' ){
+			consume();
+			return new Token(RBRACK, ")");
+		}
+		else{
+			return null;
+		}
+	}
+
+	private Token LBRACK() {
+		if( c == '(' ){
+			consume();
+			return new Token(LBRACK, "(");
+		}
+		else{
+			return null;
+		}
+	}
+
+	private Token DIV() {
+		if( c == '/' ){
+			consume();
+			return new Token(DIV, "/");
+		}
+		else{
+			return null;
+		}
+	}
+
+	private Token MULTI() {
+		if( c == '*' ){
+			consume();
+			return new Token(MULTI, "*");
+		}
+		else{
+			return null;
+		}
+	}
+
+	private Token MINUS() {
+		if( c == '-' ){
+			consume();
+			return new Token(MINUS, "-");
+		}
+		else{
+			return null;
+		}
+	}
+
+	private String rekID(String str){
+		if( isLETTER() || isDIGIT() ){
+			str = str + c;
+			consume();
+			return rekID(str);
+		}
+		else {
+			return str;
+		}
+	}
+	
+	private Token ID() {
+		if( isLETTER() ){
+			return new Token(ID, rekID("") );
+		}
+		else {
+			return null;
+		}		
+		
 	}
 
 	@Override
@@ -71,27 +191,32 @@ public class RecursiveDescentLexer extends Lexer {
 		}
 	}
 	
-	private Token INTEGER(String str){
+	private String rekINTEGER( String str ){
 		if( isDIGIT() ){
 			str = str + c;
 			consume();
-			return INTEGER(str);
-		}
-		else if(str.isEmpty() ){
-			return null;
+			return rekINTEGER(str);
 		}
 		else{
-			return new Token(INTEGER, str);
+			return str;
 		}
 	}
 	
-	public static void main(String[] args) {
-		Lexer lexer = new RecursiveDescentLexer("+124590+578+");
-		Token t = lexer.nextToken();
-        while ( t.type != Lexer.EOF_TYPE ) {
-            System.out.println(t);
-            t = lexer.nextToken();
-        }
+	private Token INTEGER(){
+		if( isDIGIT() ){
+			return new Token(INTEGER, rekINTEGER(""));
+		}
+		else {
+			return null;
+		}		
+		
 	}
+	
+
+    /** WS : (' '|'\t'|'\r')* ; // ignore any whitespace */
+    void WS() {
+        while ( c==' ' || c=='\t' || c=='\r' ) consume();
+    }
+	
 
 }
