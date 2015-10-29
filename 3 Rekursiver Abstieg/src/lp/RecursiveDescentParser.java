@@ -3,6 +3,8 @@
  */
 package lp;
 
+import static lp.RecursiveDescentLexer.*;
+
 /**
  * @author skrause
  *
@@ -17,67 +19,79 @@ public class RecursiveDescentParser extends Parser {
 		// TODO Auto-generated constructor stub
 	}
 	
+	/**
+	 * statlist -> stat+
+	 */
 	public void statlist() {
 		stat();
+		while( lookahead.type != EOF){
+			stat();
+		}
 	}
 	
+	/**
+	 * stat -> (sum NL |NL)
+	 */
 	public void stat(){
-		if( lookahead.type == RecursiveDescentLexer.NL){
-			match( RecursiveDescentLexer.NL );
+		if( lookahead.type == NL){
+			match( NL );
 		}
 		else {
 			sum();
 		}
 	}
 	
+	/**
+	 * sum -> prod [(+|-)prod]*
+	 */
 	public void sum(){
 		prod();
-		while( lookahead.type == RecursiveDescentLexer.PLUS || lookahead.type == RecursiveDescentLexer.MINUS ){
-			if( lookahead.type == RecursiveDescentLexer.PLUS ){
-				match( RecursiveDescentLexer.PLUS );
+		while( lookahead.type == PLUS || lookahead.type == MINUS ){
+			if( lookahead.type == PLUS ){
+				match( PLUS );
 			}
-			else if( lookahead.type == RecursiveDescentLexer.MINUS ){
-				match( RecursiveDescentLexer.MINUS );
+			else if( lookahead.type == MINUS ){
+				match( MINUS );
 			}
 			prod();
 		}
 	}
 	
+	/**
+	 * prod -> term [(+|-)term]*
+	 */
 	public void prod(){
 		term();
-		while( lookahead.type == RecursiveDescentLexer.MULTI || lookahead.type == RecursiveDescentLexer.DIV ){
-			if( lookahead.type == RecursiveDescentLexer.MULTI ){
-				match( RecursiveDescentLexer.MULTI );
+		while( lookahead.type == MULTI || lookahead.type == DIV ){
+			if( lookahead.type == MULTI ){
+				match( MULTI );
 			}
-			else if( lookahead.type == RecursiveDescentLexer.DIV ){
-				match( RecursiveDescentLexer.DIV );
+			else if( lookahead.type == DIV ){
+				match( DIV );
 			}
 			term();
 		}
 	}
 	
+	/**
+	 * term -> + term | - term | ( term ) | INTEGER
+	 */
 	public void term(){
-		
+		if( lookahead.type == PLUS){
+			match( PLUS ); term();
+		}
+		else if( lookahead.type == MINUS ){
+			 match( MINUS ); term();
+		}
+		else if( lookahead.type == LBRACK ){
+			match( LBRACK ); sum(); match( RBRACK );
+		}
+		else if( lookahead.type == INTEGER){
+			match( INTEGER );
+		}
+		else {
+			throw new Error("+,-,( or INTEGER expected");
+		}
 	}
 
 }
-//
-//public ListParser(Lexer input) { super(input); }
-//
-///** list : '[' elements ']' ; // match bracketed list */
-//public void list() {
-//    match(ListLexer.LBRACK); elements(); match(ListLexer.RBRACK);
-//}
-///** elements : element (',' element)* ; */
-//void elements() {
-//    element();
-//    while ( lookahead.type==ListLexer.COMMA ) {
-//        match(ListLexer.COMMA); element();
-//    }
-//}
-///** element : name | list ; // element is name or nested list */
-//void element() {
-//    if ( lookahead.type==ListLexer.NAME ) match(ListLexer.NAME);
-//    else if ( lookahead.type==ListLexer.LBRACK ) list();
-//    else throw new Error("expecting name or list; found "+lookahead);
-//}

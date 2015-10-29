@@ -29,122 +29,64 @@ public class RecursiveDescentLexer extends Lexer {
 
 	@Override
 	public Token nextToken() {
-		Token nextToken = null;
 		while( c!=EOF){
-			if( c == ' ' || c=='\t' || c=='\r') {
-				WS();
-				continue;
-			}			
-			else if( c == '+'){
-				nextToken = PLUS();				
-			}
-			else if( isDIGIT() ){
-				nextToken = INTEGER();
-			}
-			else if( isLETTER() ){
-				nextToken = ID();
-			}
-			else if( c == '-'){
-				nextToken = MINUS();
-			}
-			else if( c == '*' ){
-				nextToken = MULTI();
-			}
-			else if( c == '/'){
-				nextToken = DIV();
-			}
-			else if( c == '('){
-				nextToken = LBRACK();
-			}
-			else if( c == ')'){
-				nextToken = RBRACK();
-			}
-			else if( c == '='){
-				nextToken = EQUALS();
-			}		
-			else if( c == '\n'){
-				nextToken = NL();
-			}
-			
-			
-			if( nextToken != null){
-				return nextToken;
-			}
-			else{
-				throw new Error("Invalid Character: "+c);
+			switch( c ){
+				case ' ':case '\t':case'\r':	WS();continue;
+				case '+': return PLUS();
+				case '-': return MINUS();
+				case '*': return MULTI();
+				case '/': return DIV();
+				case '=': return EQUALS();
+				case '(': return LBRACK();
+				case ')': return RBRACK();
+				case '\n': return NL();
+				default:
+					if( isDIGIT() ){
+						return INTEGER();
+					}
+					if( isLETTER() ){
+						return ID();
+					}
+					throw new Error("Invalid Character: "+c);
 			}
 		}
 		return new Token(EOF_TYPE,"<EOF>");
 	}
 
 	private Token NL() {
-		if( c == '\n' ){
-			consume();
-			return new Token(NL, "NL");
-		}
-		else{
-			return null;
-		}
+		consume();
+		return new Token(NL, "NL");		
 	}
 
-	private Token EQUALS() {
-		if( c == '=' ){
-			consume();
-			return new Token(EQUALS, "=");
-		}
-		else{
-			return null;
-		}
+	private Token EQUALS() {		
+		consume();
+		return new Token(EQUALS, "=");
+		
 	}
 
 	private Token RBRACK() {
-		if( c == ')' ){
-			consume();
-			return new Token(RBRACK, ")");
-		}
-		else{
-			return null;
-		}
+		consume();
+		return new Token(RBRACK, ")");
 	}
 
 	private Token LBRACK() {
-		if( c == '(' ){
-			consume();
-			return new Token(LBRACK, "(");
-		}
-		else{
-			return null;
-		}
+		consume();
+		return new Token(LBRACK, "(");		
 	}
 
 	private Token DIV() {
-		if( c == '/' ){
-			consume();
-			return new Token(DIV, "/");
-		}
-		else{
-			return null;
-		}
+		consume();
+		return new Token(DIV, "/");
 	}
 
 	private Token MULTI() {
-		if( c == '*' ){
-			consume();
-			return new Token(MULTI, "*");
-		}
-		else{
-			return null;
-		}
+		consume();
+		return new Token(MULTI, "*");
 	}
 
 	private Token MINUS() {
-		if( c == '-' ){
-			consume();
-			return new Token(MINUS, "-");
-		}
-		else{
-			return null;
-		}
+		consume();
+		return new Token(MINUS, "-");
 	}
 
 	private String rekID(String str){
@@ -159,13 +101,7 @@ public class RecursiveDescentLexer extends Lexer {
 	}
 	
 	private Token ID() {
-		if( isLETTER() ){
-			return new Token(ID, rekID("") );
-		}
-		else {
-			return null;
-		}		
-		
+		return new Token(ID, rekID("") );	
 	}
 
 	@Override
@@ -182,13 +118,8 @@ public class RecursiveDescentLexer extends Lexer {
 	}
 	
 	private Token PLUS(){
-		if( c == '+' ){
-			consume();
-			return new Token(PLUS, "+");
-		}
-		else{
-			return null;
-		}
+		consume();
+		return new Token(PLUS, "+");
 	}
 	
 	private String rekINTEGER( String str ){
@@ -203,13 +134,7 @@ public class RecursiveDescentLexer extends Lexer {
 	}
 	
 	private Token INTEGER(){
-		if( isDIGIT() ){
-			return new Token(INTEGER, rekINTEGER(""));
-		}
-		else {
-			return null;
-		}		
-		
+		return new Token(INTEGER, rekINTEGER("") );		
 	}
 	
 
