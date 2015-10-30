@@ -3,5 +3,3 @@ OPERAND=3
 BINOP=1
 IGNORE=5
 NL=4
-'#'=2
-'\n'=4

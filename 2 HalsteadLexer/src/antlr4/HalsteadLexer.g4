@@ -4,7 +4,7 @@ lexer grammar HalsteadLexer;
 OPERATOR: ( SCSPEC | TYPE_QUAL | RESERVED | STAT | OPERATORS ) ;
 OPERAND: ( TYPESPEC | IDENTIFIER | NUMBER | STRING | CHAR ) ;
 IGNORE: ( COMMENT | SL_COMMENT | 'do' | ':' | ')' | '}' | ']' | HEADER_FILE | WHITESPACE | NL) -> skip;
-
+ 
 fragment NUMBER: ( INT ( '.' INT )? );
 fragment TYPESPEC: ( 'bool' | 'char' | 'double' | 'float' | 'int' | 'long' | 'short' | 'signed' | 'unsigned' | 'void' );
 fragment INT: ( [0-9]+ );
