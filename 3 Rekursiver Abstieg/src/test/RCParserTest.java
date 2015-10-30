@@ -3,12 +3,9 @@
  */
 package test;
 
-import static org.junit.Assert.*;
 import lp.Lexer;
-import lp.Parser;
 import lp.RecursiveDescentLexer;
 import lp.RecursiveDescentParser;
-import lp.Token;
 
 import org.junit.Test;
 
@@ -23,8 +20,12 @@ public class RCParserTest {
 	 */
 	@Test
 	public void testRecursiveDescentParser() {
-		Lexer lexer = new RecursiveDescentLexer(" 5 + (10 - 23) ");
+		Lexer lexer = new RecursiveDescentLexer(" 5 + (10 - 23)\n");
 		RecursiveDescentParser parser = new RecursiveDescentParser(lexer);
+		parser.statlist();
+		
+		lexer = new RecursiveDescentLexer(" value = (10 - 23)\n");
+		parser = new RecursiveDescentParser(lexer);
 		parser.statlist();
 	}
 

@@ -23,21 +23,27 @@ public class RecursiveDescentParser extends Parser {
 	 * statlist -> stat+
 	 */
 	public void statlist() {
-		stat();
-		while( lookahead.type != EOF){
+		do{		
 			stat();
-		}
+		}while( lookahead.type != EOF_TYPE);
 	}
 	
 	/**
-	 * stat -> (sum NL |NL)
+	 * stat -> (sum NL |NL | ID = sum NL)
 	 */
 	public void stat(){
-		if( lookahead.type == NL){
+		if( lookahead.type == NL){ 
 			match( NL );
 		}
-		else {
+		else if( lookahead.type == ID){
+			match( ID );
+			match( EQUALS );
 			sum();
+			match(NL);
+		}
+		else{
+			sum();
+			match( NL );
 		}
 	}
 	
@@ -52,6 +58,9 @@ public class RecursiveDescentParser extends Parser {
 			}
 			else if( lookahead.type == MINUS ){
 				match( MINUS );
+			}
+			else {
+				throw new Error("+ or - expected");
 			}
 			prod();
 		}
@@ -68,6 +77,9 @@ public class RecursiveDescentParser extends Parser {
 			}
 			else if( lookahead.type == DIV ){
 				match( DIV );
+			}
+			else {
+				throw new Error(" * or / expected");
 			}
 			term();
 		}
@@ -90,7 +102,7 @@ public class RecursiveDescentParser extends Parser {
 			match( INTEGER );
 		}
 		else {
-			throw new Error("+,-,( or INTEGER expected");
+			throw new Error("+,-,( ,INTEGER or ID expected");
 		}
 	}
 
