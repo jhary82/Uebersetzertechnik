@@ -27,6 +27,14 @@ public class RCParserTest {
 		lexer = new RecursiveDescentLexer(" value = (10 - 23)\n");
 		parser = new RecursiveDescentParser(lexer);
 		parser.statlist();
+		
+		lexer = new RecursiveDescentLexer(" value = (a + 10 - 23)\n");
+		parser = new RecursiveDescentParser(lexer);
+		parser.statlist();
+		
+		lexer = new RecursiveDescentLexer("20 - 10 \n");
+		parser = new RecursiveDescentParser(lexer);
+		parser.statlist();
 	}
 
 }

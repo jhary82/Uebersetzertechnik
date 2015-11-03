@@ -20,7 +20,7 @@ public class RecursiveDescentLexer extends Lexer {
 	public static int EQUALS = 10;
 	public static int NL = 11;
 	
-	public static String[] tokenNames =  {"EOF", "ID", "INTEGER", "PLUS", "MINUS", "MULTI", "DIV", "LBRACK", "RBRACK", "EQUALS", "NL" };	
+	public static String[] tokenNames =  {"e/a", "EOF", "ID", "INTEGER", "PLUS", "MINUS", "MULTI", "DIV", "LBRACK", "RBRACK", "EQUALS", "NL" };	
 	
 	public RecursiveDescentLexer(String input) {
 		super(input);

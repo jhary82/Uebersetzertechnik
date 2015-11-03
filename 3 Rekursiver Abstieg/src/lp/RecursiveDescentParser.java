@@ -35,7 +35,7 @@ public class RecursiveDescentParser extends Parser {
 		if( lookahead.type == NL){ 
 			match( NL );
 		}
-		else if( lookahead.type == ID){
+		else if( lookahead.type == ID && nextToken.type == EQUALS){
 			match( ID );
 			match( EQUALS );
 			sum();
@@ -86,7 +86,7 @@ public class RecursiveDescentParser extends Parser {
 	}
 	
 	/**
-	 * term -> + term | - term | ( term ) | INTEGER
+	 * term -> + term | - term | ( term ) | INTEGER | ID
 	 */
 	public void term(){
 		if( lookahead.type == PLUS){
@@ -100,6 +100,9 @@ public class RecursiveDescentParser extends Parser {
 		}
 		else if( lookahead.type == INTEGER){
 			match( INTEGER );
+		}
+		else if( lookahead.type == ID ){
+			match( ID );
 		}
 		else {
 			throw new Error("+,-,( ,INTEGER or ID expected");
