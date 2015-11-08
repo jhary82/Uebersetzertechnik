@@ -24,7 +24,6 @@ public class RecursiveDescentLexer extends Lexer {
 	
 	public RecursiveDescentLexer(String input) {
 		super(input);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

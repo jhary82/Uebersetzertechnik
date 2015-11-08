@@ -16,7 +16,6 @@ public class RecursiveDescentParser extends Parser {
 	 */
 	public RecursiveDescentParser(Lexer input) {
 		super(input);
-		// TODO Auto-generated constructor stub
 	}
 	
 	/**

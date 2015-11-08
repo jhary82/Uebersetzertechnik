@@ -32,7 +32,7 @@ public class RCParserTest {
 		parser = new RecursiveDescentParser(lexer);
 		parser.statlist();
 		
-		lexer = new RecursiveDescentLexer("20 - 10 \n");
+		lexer = new RecursiveDescentLexer("1 + 2 + 3\n");
 		parser = new RecursiveDescentParser(lexer);
 		parser.statlist();
 	}
