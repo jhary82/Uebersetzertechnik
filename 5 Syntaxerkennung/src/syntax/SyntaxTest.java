@@ -36,7 +36,7 @@ public class SyntaxTest {
 		output( "10 +swewe 20\n");
 		output( "a = (10 + 20)*5+b \n");
 		output( "b > a\n");
-		output("2 ^ 4");
+		output("10^10\n");
 		
 	}
 
