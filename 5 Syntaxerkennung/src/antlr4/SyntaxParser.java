@@ -435,6 +435,9 @@ public class SyntaxParser extends Parser {
 
 	public static class TermContext extends ParserRuleContext {
 		public TerminalNode ID() { return getToken(SyntaxParser.ID, 0); }
+		public TermContext term() {
+			return getRuleContext(TermContext.class,0);
+		}
 		public TerminalNode INTEGER() { return getToken(SyntaxParser.INTEGER, 0); }
 		public TerminalNode PLUS() { return getToken(SyntaxParser.PLUS, 0); }
 		public TerminalNode MINUS() { return getToken(SyntaxParser.MINUS, 0); }
@@ -460,56 +463,45 @@ public class SyntaxParser extends Parser {
 	public final TermContext term() throws RecognitionException {
 		TermContext _localctx = new TermContext(_ctx, getState());
 		enterRule(_localctx, 12, RULE_term);
-		int _la;
 		try {
-			setState(74);
-			switch ( getInterpreter().adaptivePredict(_input,9,_ctx) ) {
-			case 1:
+			setState(72);
+			switch (_input.LA(1)) {
+			case PLUS:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(63);
-				_la = _input.LA(1);
-				if (_la==PLUS || _la==MINUS) {
-					{
-					setState(62);
-					_la = _input.LA(1);
-					if ( !(_la==PLUS || _la==MINUS) ) {
-					_errHandler.recoverInline(this);
-					}
-					consume();
-					}
-				}
-
-				setState(65); match(INTEGER);
+				setState(62); match(PLUS);
+				setState(63); term();
 				}
 				break;
-			case 2:
+			case MINUS:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(67);
-				_la = _input.LA(1);
-				if (_la==PLUS || _la==MINUS) {
-					{
-					setState(66);
-					_la = _input.LA(1);
-					if ( !(_la==PLUS || _la==MINUS) ) {
-					_errHandler.recoverInline(this);
-					}
-					consume();
-					}
-				}
-
-				setState(69); match(ID);
+				setState(64); match(MINUS);
+				setState(65); term();
 				}
 				break;
-			case 3:
+			case INTEGER:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(70); match(LBRACK);
-				setState(71); sum();
-				setState(72); match(RBRACK);
+				setState(66); match(INTEGER);
 				}
 				break;
+			case ID:
+				enterOuterAlt(_localctx, 4);
+				{
+				setState(67); match(ID);
+				}
+				break;
+			case LBRACK:
+				enterOuterAlt(_localctx, 5);
+				{
+				setState(68); match(LBRACK);
+				setState(69); sum();
+				setState(70); match(RBRACK);
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -524,27 +516,26 @@ public class SyntaxParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\20O\4\2\t\2\4\3\t"+
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\20M\4\2\t\2\4\3\t"+
 		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\3\2\6\2\22\n\2\r\2\16\2\23"+
 		"\3\3\3\3\3\3\3\3\3\3\3\3\5\3\34\n\3\3\3\3\3\3\3\3\3\5\3\"\n\3\3\4\3\4"+
 		"\3\4\5\4\'\n\4\3\5\3\5\3\5\7\5,\n\5\f\5\16\5/\13\5\3\6\3\6\3\6\7\6\64"+
-		"\n\6\f\6\16\6\67\13\6\3\7\3\7\3\7\7\7<\n\7\f\7\16\7?\13\7\3\b\5\bB\n\b"+
-		"\3\b\3\b\5\bF\n\b\3\b\3\b\3\b\3\b\3\b\5\bM\n\b\3\b\2\2\t\2\4\6\b\n\f\16"+
-		"\2\5\4\2\3\3\5\5\3\2\b\t\3\2\n\13S\2\21\3\2\2\2\4!\3\2\2\2\6#\3\2\2\2"+
-		"\b(\3\2\2\2\n\60\3\2\2\2\f8\3\2\2\2\16L\3\2\2\2\20\22\5\4\3\2\21\20\3"+
-		"\2\2\2\22\23\3\2\2\2\23\21\3\2\2\2\23\24\3\2\2\2\24\3\3\2\2\2\25\26\5"+
-		"\6\4\2\26\27\7\17\2\2\27\"\3\2\2\2\30\"\7\17\2\2\31\34\7\6\2\2\32\34\5"+
-		"\b\5\2\33\31\3\2\2\2\33\32\3\2\2\2\34\35\3\2\2\2\35\36\7\16\2\2\36\37"+
-		"\5\b\5\2\37 \7\17\2\2 \"\3\2\2\2!\25\3\2\2\2!\30\3\2\2\2!\33\3\2\2\2\""+
-		"\5\3\2\2\2#&\5\b\5\2$%\t\2\2\2%\'\5\b\5\2&$\3\2\2\2&\'\3\2\2\2\'\7\3\2"+
-		"\2\2(-\5\n\6\2)*\t\3\2\2*,\5\n\6\2+)\3\2\2\2,/\3\2\2\2-+\3\2\2\2-.\3\2"+
-		"\2\2.\t\3\2\2\2/-\3\2\2\2\60\65\5\f\7\2\61\62\t\4\2\2\62\64\5\f\7\2\63"+
-		"\61\3\2\2\2\64\67\3\2\2\2\65\63\3\2\2\2\65\66\3\2\2\2\66\13\3\2\2\2\67"+
-		"\65\3\2\2\28=\5\16\b\29:\7\4\2\2:<\5\16\b\2;9\3\2\2\2<?\3\2\2\2=;\3\2"+
-		"\2\2=>\3\2\2\2>\r\3\2\2\2?=\3\2\2\2@B\t\3\2\2A@\3\2\2\2AB\3\2\2\2BC\3"+
-		"\2\2\2CM\7\7\2\2DF\t\3\2\2ED\3\2\2\2EF\3\2\2\2FG\3\2\2\2GM\7\6\2\2HI\7"+
-		"\f\2\2IJ\5\b\5\2JK\7\r\2\2KM\3\2\2\2LA\3\2\2\2LE\3\2\2\2LH\3\2\2\2M\17"+
-		"\3\2\2\2\f\23\33!&-\65=AEL";
+		"\n\6\f\6\16\6\67\13\6\3\7\3\7\3\7\7\7<\n\7\f\7\16\7?\13\7\3\b\3\b\3\b"+
+		"\3\b\3\b\3\b\3\b\3\b\3\b\3\b\5\bK\n\b\3\b\2\2\t\2\4\6\b\n\f\16\2\5\4\2"+
+		"\3\3\5\5\3\2\b\t\3\2\n\13Q\2\21\3\2\2\2\4!\3\2\2\2\6#\3\2\2\2\b(\3\2\2"+
+		"\2\n\60\3\2\2\2\f8\3\2\2\2\16J\3\2\2\2\20\22\5\4\3\2\21\20\3\2\2\2\22"+
+		"\23\3\2\2\2\23\21\3\2\2\2\23\24\3\2\2\2\24\3\3\2\2\2\25\26\5\6\4\2\26"+
+		"\27\7\17\2\2\27\"\3\2\2\2\30\"\7\17\2\2\31\34\7\6\2\2\32\34\5\b\5\2\33"+
+		"\31\3\2\2\2\33\32\3\2\2\2\34\35\3\2\2\2\35\36\7\16\2\2\36\37\5\b\5\2\37"+
+		" \7\17\2\2 \"\3\2\2\2!\25\3\2\2\2!\30\3\2\2\2!\33\3\2\2\2\"\5\3\2\2\2"+
+		"#&\5\b\5\2$%\t\2\2\2%\'\5\b\5\2&$\3\2\2\2&\'\3\2\2\2\'\7\3\2\2\2(-\5\n"+
+		"\6\2)*\t\3\2\2*,\5\n\6\2+)\3\2\2\2,/\3\2\2\2-+\3\2\2\2-.\3\2\2\2.\t\3"+
+		"\2\2\2/-\3\2\2\2\60\65\5\f\7\2\61\62\t\4\2\2\62\64\5\f\7\2\63\61\3\2\2"+
+		"\2\64\67\3\2\2\2\65\63\3\2\2\2\65\66\3\2\2\2\66\13\3\2\2\2\67\65\3\2\2"+
+		"\28=\5\16\b\29:\7\4\2\2:<\5\16\b\2;9\3\2\2\2<?\3\2\2\2=;\3\2\2\2=>\3\2"+
+		"\2\2>\r\3\2\2\2?=\3\2\2\2@A\7\b\2\2AK\5\16\b\2BC\7\t\2\2CK\5\16\b\2DK"+
+		"\7\7\2\2EK\7\6\2\2FG\7\f\2\2GH\5\b\5\2HI\7\r\2\2IK\3\2\2\2J@\3\2\2\2J"+
+		"B\3\2\2\2JD\3\2\2\2JE\3\2\2\2JF\3\2\2\2K\17\3\2\2\2\n\23\33!&-\65=J";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

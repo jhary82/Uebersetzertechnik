@@ -6,7 +6,7 @@ comparison : sum (('<' |'>') sum)?;
 sum : prod ((PLUS|MINUS)prod)*;
 prod : potenz ((MULTI|DIV)potenz)*;
 potenz : term ('^' term)* ;
-term : (PLUS|MINUS)? INTEGER | (PLUS|MINUS)?ID | LBRACK sum RBRACK;
+term : PLUS term | MINUS term | INTEGER | ID | LBRACK sum RBRACK;
 
 
 ID : LETTER [DIGIT|LETTER]*;
