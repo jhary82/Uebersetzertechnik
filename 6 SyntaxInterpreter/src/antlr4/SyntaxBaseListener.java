@@ -1,7 +1,7 @@
 // Generated from Syntax.g4 by ANTLR 4.4
 package antlr4;
 
-	import java.util.*;
+	import java.util.*;	
 
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -32,6 +32,42 @@ public class SyntaxBaseListener implements SyntaxListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterComparison(@NotNull SyntaxParser.ComparisonContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitComparison(@NotNull SyntaxParser.ComparisonContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterProd(@NotNull SyntaxParser.ProdContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitProd(@NotNull SyntaxParser.ProdContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterStatlist(@NotNull SyntaxParser.StatlistContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStatlist(@NotNull SyntaxParser.StatlistContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterSum(@NotNull SyntaxParser.SumContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -56,25 +92,13 @@ public class SyntaxBaseListener implements SyntaxListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMultExpr(@NotNull SyntaxParser.MultExprContext ctx) { }
+	@Override public void enterPotenz(@NotNull SyntaxParser.PotenzContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMultExpr(@NotNull SyntaxParser.MultExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterProg(@NotNull SyntaxParser.ProgContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitProg(@NotNull SyntaxParser.ProgContext ctx) { }
+	@Override public void exitPotenz(@NotNull SyntaxParser.PotenzContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

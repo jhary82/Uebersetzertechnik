@@ -1,25 +1,44 @@
 grammar Syntax;
 
 @header {
-	import java.util.*;
+	import java.util.*;	
 }
 
-prog: stat+;
+@parser::members {
+	Map<String, Integer> memory = new HashMap<>();
+}
 
-stat: sum NL {System.out.println($sum.value);}
-	| NL
-	; 
+statlist: stat+;
+
+stat
+	:	comparison NL {System.out.println($comparison.value);}
+	|	ID EQUALS e=sum NL { memory.put($ID.text, $e.value); }
+	|	NL
+; 
+
+comparison returns[int value] 
+	:	e=sum {$value = $e.value;} 
+		( '<' e=sum { if( $value < $e.value) $value = 1; else $value = 0;}
+		| '>' e=sum { if( $value > $e.value) $value = 1; else $value = 0;})?
+;
 
 sum returns [int value]
-	:	e=multExpr {$value = $e.value;}
-		('+' e=multExpr {$value += $e.value;}
-		|'-' e=multExpr {$value -= $e.value;}
+	:	e=prod {$value = $e.value;}
+		(PLUS e=prod {$value += $e.value;}
+		|MINUS e=prod {$value -= $e.value;}
 		)*
-	;
+;
 
-multExpr returns [int value]
-	:	e=term {$value = $e.value;} ('*' e=term {$value *= $e.value;})*
-	;
+prod returns [int value] 
+	:	e=potenz {$value = $e.value;} 
+		(MULTI e=potenz {$value *= $e.value;}
+		|DIV e=potenz {$value /= $e.value;})*
+;
+
+potenz returns [int value]
+	:	e=term {$value = $e.value;} 
+		('^' e=term { $value = (int)Math.pow( $value, $e.value); })*
+;
 	
 term returns [int value]
 	:	INTEGER 				{$value = $INTEGER.int;}
@@ -27,36 +46,8 @@ term returns [int value]
 	|	(PLUS e=term	{$value += $e.value;}
 		|MINUS e=term	{$value -= $e.value;}
 		)*
-	;
-	
-
-
-//
-//@parser::members {
-///** "memory" for our calculator; variable/value pairs go here */ 
-//	Map<String, Integer> memory = new HashMap<String, Integer>();
-//
-//	int eval(int left, int op, int right) {
-//		switch ( op ) {
-//			case MULTI : return left * right;
-//			case DIV :   return left / right;
-//			case PLUS :  return left + right;
-//			case MINUS : return left - right;
-//		}
-//		return 0;
-//	}
-//}
-//
-//statlist : stat+;
-//stat : (comparison NL |NL | (ID|sum) EQUALS sum NL);
-//comparison : sum (('<' |'>') sum)?;
-//sum : prod ((PLUS|MINUS)prod)*;
-//prod : potenz ((MULTI|DIV)potenz)*;
-//potenz : term ('^' term)* ;
-//term : (PLUS|MINUS)? INTEGER | (PLUS|MINUS)?ID | LBRACK sum RBRACK;
-//
-//
-
+	|	ID { $value = memory.get($ID.text); }
+;
 
 // TOKENS
 ID : LETTER [DIGIT|LETTER]*;
