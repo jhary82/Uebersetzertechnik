@@ -10,33 +10,17 @@ import java.io.InputStream;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.Token;
+import org.antlr.v4.runtime.tree.ParseTree;
 
-import cymbol.CymbolLexer;
+import cymbol.*;
 
 /**
  * @author simon
  *
  */
-public class McCabe {
-
-	/**
-	 * Berechnet den McCabe-Überdeckungsgrad
-	 * @param is einen File-Inputstream
-	 * @return den McCabe-Überdeckungsgrad
-	 * @throws IOException 
-	 */
-	public static int mcCabe(InputStream is) throws IOException{
-		ANTLRInputStream input = new ANTLRInputStream(is);        
-		CymbolLexer lexer = new CymbolLexer(input);
-		int counter = 1;
-		for(Token token : lexer.getAllTokens()){
-			if( token.getText().equals("if")){
-				counter++;
-			}
-		}
-		return counter;
-	}
+public class Metrics {
 	
 	/**
 	 * @param args
@@ -45,6 +29,12 @@ public class McCabe {
 	public static void main(String[] args) throws IOException {
 		
         InputStream is = new FileInputStream("t1.cym");
+        ANTLRInputStream input = new ANTLRInputStream(is);        
+		CymbolLexer lexer = new CymbolLexer(input);
+		CommonTokenStream tokens = new CommonTokenStream(lexer);
+		CymbolParser parser = new CymbolParser(tokens);
+		ParseTree tree = parser.file();
+		CymbolListener listener = ;
 		
 		System.out.println("McCabe-Value = "+mcCabe(is));
        

@@ -14,11 +14,11 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import cymbol.*;
 
 
-public class Calc {
+public class Test {
     public static void main(String[] args) throws Exception {	          
 
         ANTLRInputStream input = new ANTLRInputStream("for(int i = 0; i < 5; i = i +1){int b = 1;}"+"\n");        
-        CymbolLexer lexer = new CymbolLexer(input);
+        CymbolLexer lexer = new CymbolLexer(input); 
         
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         CymbolParser parser = new CymbolParser(tokens); // share single parser instance
