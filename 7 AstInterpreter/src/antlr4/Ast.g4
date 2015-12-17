@@ -8,7 +8,7 @@ stat
 	:	comparison NL 			# comparisonStat
 	|	ID EQUALS sum NL		# assignStat
 	|	NL						# nlStat
-; 
+;  
 
 comparison  
 	:	sum	( '<' sum | '>' sum | EQUALS EQUALS sum )?  		
