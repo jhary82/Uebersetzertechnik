@@ -13,6 +13,7 @@ import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 import cymbol.*;
 
@@ -34,10 +35,10 @@ public class Metrics {
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		CymbolParser parser = new CymbolParser(tokens);
 		ParseTree tree = parser.file();
-		CymbolListener listener = ;
 		
-		System.out.println("McCabe-Value = "+mcCabe(is));
-       
+		ParseTreeWalker walker = new ParseTreeWalker(); // create standard walker
+		MetricsListener extractor = new MetricsListener();
+		walker.walk(extractor, tree); 
        
 	}
 

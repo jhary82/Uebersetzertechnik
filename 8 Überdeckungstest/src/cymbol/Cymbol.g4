@@ -5,7 +5,7 @@ file:   (functionDecl | varDecl)+ ;
 varDecl
     :   type ID ('=' expr)? ';'
     ;
-type:   'float' | 'int' | 'void' ; // user-defined types
+type:   'float' | 'int' | 'void' | 'char'; // user-defined types
 
 functionDecl
     :   type ID '(' formalParameters? ')' block // "void f(int x) {...}"
@@ -21,7 +21,7 @@ block:  '{' stat* '}' ;   // possibly empty statement block
 stat:   block								#statBlock
     |   varDecl								#statVarDecl
     |   'if' expr 'then' stat ('else' stat)? #statIf
-    |	'for' '(' varDecl   ID ('<'|'>'|'=='|'!=')expr ';'	ID '=' expr ')' block #statFor
+    |	'for' '('  expr ';' ID ('<'|'>'|'==' | '!=') expr ';'	expr ')' block #statFor
     //for(int i=0; i < 2; i = i + 1){} 
     |   'return' expr? ';' 			#statReturn
     |   expr '=' expr ';' 			#statAssignment// assignment
@@ -34,7 +34,7 @@ expr:   ID '(' exprList? ')'    // func call like f(), f(x), f(1,2)
     |   '!' expr                // boolean not
     |   expr '*' expr
     |   expr ('+'|'-') expr
-    |   expr '==' expr          // equality comparison (lowest priority op)
+    |   expr ('=='|'!=') expr          // equality comparison (lowest priority op)
     |   ID                      // variable reference
     |   INT
     |   '(' expr ')'

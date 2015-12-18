@@ -25,7 +25,8 @@ public class MetricsListener extends CymbolBaseListener {
 	 */
 	@Override 
 	public void enterFunctionDecl(CymbolParser.FunctionDeclContext ctx) {
-		System.out.println("Metriken für "+ctx.getText());
+		
+		System.out.println("Metriken für "+ ctx.getChild(1).getText());
 		this.mcCabeValue = 0;
 		this.interiorValue = 1;
 	}
