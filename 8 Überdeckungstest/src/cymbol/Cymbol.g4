@@ -20,8 +20,8 @@ formalParameter
 block:  '{' stat* '}' ;   // possibly empty statement block
 stat:   block								#statBlock
     |   varDecl								#statVarDecl
-    |   'if' expr 'then' stat ('else' stat)? #statIf
-    |	'for' '('  expr ';' ID ('<'|'>'|'==' | '!=') expr ';'	expr ')' block #statFor
+    |   'if' expr stat ('else' stat)? #statIf
+    |	'for' '('  expr'=' expr';' ID ('<'|'>'|'==' | '!=') expr ';'	expr'='expr ')' block #statFor
     //for(int i=0; i < 2; i = i + 1){} 
     |   'return' expr? ';' 			#statReturn
     |   expr '=' expr ';' 			#statAssignment// assignment
