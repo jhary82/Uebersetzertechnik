@@ -21,6 +21,15 @@ public class SymbolTable implements Scope { // single-scope symtab
     public Scope getEnclosingScope() { return null; }
     public void define(Symbol sym) { symbols.put(sym.name, sym); }
     public Symbol resolve(String name) { return symbols.get(name); }
-
+    
+    public List<Symbol> noRefs(){
+    	List<Symbol> list = new LinkedList<>();
+    	for(Symbol s : symbols.values()){
+    		if(!s.ref){
+    			list.add(s);
+    		}
+    	}
+    	return list;
+    }
     public String toString() { return getScopeName()+":"+symbols; }
 }

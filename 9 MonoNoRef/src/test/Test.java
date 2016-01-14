@@ -11,6 +11,7 @@ import org.antlr.v4.runtime.*;
 
 import antlr4.CymbolLexer;
 import antlr4.CymbolParser;
+import symbolTable.Symbol;
 import symbolTable.SymbolTable;
 
 public class Test {
@@ -24,5 +25,9 @@ public class Test {
         SymbolTable symtab = new SymbolTable();    // create symbol table
         p.compilationUnit(symtab);                 // launch parser
         System.out.println("globals: "+ symtab.symbols);
+        System.out.print("no refs: ");
+        for(Symbol s : symtab.noRefs()){
+        	System.out.print(s+", ");
+        }
     }
 }

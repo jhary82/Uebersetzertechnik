@@ -1,4 +1,4 @@
-// Generated from Cymbol.g4 by ANTLR 4.4
+// Generated from Cymbol.g4 by ANTLR 4.5.1
 package antlr4;
 
 	import symbolTable.*;
@@ -14,18 +14,14 @@ import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class CymbolParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.4", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.5.1", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__6=1, T__5=2, T__4=3, T__3=4, T__2=5, T__1=6, T__0=7, ID=8, INT=9, WS=10, 
+		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, ID=8, INT=9, WS=10, 
 		SL_COMMENT=11;
-	public static final String[] tokenNames = {
-		"<INVALID>", "'int'", "'('", "')'", "'float'", "'+'", "';'", "'='", "ID", 
-		"INT", "WS", "SL_COMMENT"
-	};
 	public static final int
 		RULE_compilationUnit = 0, RULE_type = 1, RULE_varDeclaration = 2, RULE_expression = 3, 
 		RULE_primary = 4;
@@ -33,11 +29,47 @@ public class CymbolParser extends Parser {
 		"compilationUnit", "type", "varDeclaration", "expression", "primary"
 	};
 
-	@Override
-	public String getGrammarFileName() { return "Cymbol.g4"; }
+	private static final String[] _LITERAL_NAMES = {
+		null, "'float'", "'int'", "'='", "';'", "'+'", "'('", "')'"
+	};
+	private static final String[] _SYMBOLIC_NAMES = {
+		null, null, null, null, null, null, null, null, "ID", "INT", "WS", "SL_COMMENT"
+	};
+	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
+
+	/**
+	 * @deprecated Use {@link #VOCABULARY} instead.
+	 */
+	@Deprecated
+	public static final String[] tokenNames;
+	static {
+		tokenNames = new String[_SYMBOLIC_NAMES.length];
+		for (int i = 0; i < tokenNames.length; i++) {
+			tokenNames[i] = VOCABULARY.getLiteralName(i);
+			if (tokenNames[i] == null) {
+				tokenNames[i] = VOCABULARY.getSymbolicName(i);
+			}
+
+			if (tokenNames[i] == null) {
+				tokenNames[i] = "<INVALID>";
+			}
+		}
+	}
 
 	@Override
-	public String[] getTokenNames() { return tokenNames; }
+	@Deprecated
+	public String[] getTokenNames() {
+		return tokenNames;
+	}
+
+	@Override
+
+	public Vocabulary getVocabulary() {
+		return VOCABULARY;
+	}
+
+	@Override
+	public String getGrammarFileName() { return "Cymbol.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -68,12 +100,9 @@ public class CymbolParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_compilationUnit; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterCompilationUnit(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitCompilationUnit(this);
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitCompilationUnit(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -91,13 +120,14 @@ public class CymbolParser extends Parser {
 			do {
 				{
 				{
-				setState(10); varDeclaration();
+				setState(10);
+				varDeclaration();
 				}
 				}
 				setState(13); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( _la==T__6 || _la==T__3 );
+			} while ( _la==T__0 || _la==T__1 );
 			}
 		}
 		catch (RecognitionException re) {
@@ -118,12 +148,9 @@ public class CymbolParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_type; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterType(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitType(this);
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitType(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -133,17 +160,19 @@ public class CymbolParser extends Parser {
 		try {
 			setState(19);
 			switch (_input.LA(1)) {
-			case T__3:
+			case T__0:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(15); match(T__3);
+				setState(15);
+				match(T__0);
 				((TypeContext)_localctx).tsym =  (Type)symtab.resolve("float");
 				}
 				break;
-			case T__6:
+			case T__1:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(17); match(T__6);
+				setState(17);
+				match(T__1);
 				((TypeContext)_localctx).tsym =  (Type)symtab.resolve("int");
 				}
 				break;
@@ -168,10 +197,10 @@ public class CymbolParser extends Parser {
 	public static class VarDeclarationContext extends ParserRuleContext {
 		public TypeContext type;
 		public Token ID;
-		public TerminalNode ID() { return getToken(CymbolParser.ID, 0); }
 		public TypeContext type() {
 			return getRuleContext(TypeContext.class,0);
 		}
+		public TerminalNode ID() { return getToken(CymbolParser.ID, 0); }
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
@@ -180,12 +209,9 @@ public class CymbolParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_varDeclaration; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterVarDeclaration(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitVarDeclaration(this);
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitVarDeclaration(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -196,18 +222,23 @@ public class CymbolParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(21); ((VarDeclarationContext)_localctx).type = type();
-			setState(22); ((VarDeclarationContext)_localctx).ID = match(ID);
+			setState(21);
+			((VarDeclarationContext)_localctx).type = type();
+			setState(22);
+			((VarDeclarationContext)_localctx).ID = match(ID);
 			setState(25);
 			_la = _input.LA(1);
-			if (_la==T__0) {
+			if (_la==T__2) {
 				{
-				setState(23); match(T__0);
-				setState(24); expression();
+				setState(23);
+				match(T__2);
+				setState(24);
+				expression();
 				}
 			}
 
-			setState(27); match(T__1);
+			setState(27);
+			match(T__3);
 
 			        System.out.println("line "+((VarDeclarationContext)_localctx).ID.getLine()+": def "+(((VarDeclarationContext)_localctx).ID!=null?((VarDeclarationContext)_localctx).ID.getText():null));
 			    	VariableSymbol vs = new VariableSymbol((((VarDeclarationContext)_localctx).ID!=null?((VarDeclarationContext)_localctx).ID.getText():null),((VarDeclarationContext)_localctx).type.tsym);
@@ -238,12 +269,9 @@ public class CymbolParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_expression; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitExpression(this);
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitExpression(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -254,15 +282,18 @@ public class CymbolParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(30); primary();
+			setState(30);
+			primary();
 			setState(35);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==T__2) {
+			while (_la==T__4) {
 				{
 				{
-				setState(31); match(T__2);
-				setState(32); primary();
+				setState(31);
+				match(T__4);
+				setState(32);
+				primary();
 				}
 				}
 				setState(37);
@@ -294,12 +325,9 @@ public class CymbolParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_primary; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).enterPrimary(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CymbolListener ) ((CymbolListener)listener).exitPrimary(this);
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CymbolVisitor ) return ((CymbolVisitor<? extends T>)visitor).visitPrimary(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -312,7 +340,8 @@ public class CymbolParser extends Parser {
 			case ID:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(38); ((PrimaryContext)_localctx).ID = match(ID);
+				setState(38);
+				((PrimaryContext)_localctx).ID = match(ID);
 				System.out.println("line "+((PrimaryContext)_localctx).ID.getLine()+": ref to "+
 				    	 symtab.resolve((((PrimaryContext)_localctx).ID!=null?((PrimaryContext)_localctx).ID.getText():null)));
 				}
@@ -320,15 +349,19 @@ public class CymbolParser extends Parser {
 			case INT:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(40); match(INT);
+				setState(40);
+				match(INT);
 				}
 				break;
 			case T__5:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(41); match(T__5);
-				setState(42); expression();
-				setState(43); match(T__4);
+				setState(41);
+				match(T__5);
+				setState(42);
+				expression();
+				setState(43);
+				match(T__6);
 				}
 				break;
 			default:
@@ -353,12 +386,12 @@ public class CymbolParser extends Parser {
 		"\n\5\f\5\16\5\'\13\5\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6\60\n\6\3\6\2\2\7"+
 		"\2\4\6\b\n\2\2\62\2\r\3\2\2\2\4\25\3\2\2\2\6\27\3\2\2\2\b \3\2\2\2\n/"+
 		"\3\2\2\2\f\16\5\6\4\2\r\f\3\2\2\2\16\17\3\2\2\2\17\r\3\2\2\2\17\20\3\2"+
-		"\2\2\20\3\3\2\2\2\21\22\7\6\2\2\22\26\b\3\1\2\23\24\7\3\2\2\24\26\b\3"+
+		"\2\2\20\3\3\2\2\2\21\22\7\3\2\2\22\26\b\3\1\2\23\24\7\4\2\2\24\26\b\3"+
 		"\1\2\25\21\3\2\2\2\25\23\3\2\2\2\26\5\3\2\2\2\27\30\5\4\3\2\30\33\7\n"+
-		"\2\2\31\32\7\t\2\2\32\34\5\b\5\2\33\31\3\2\2\2\33\34\3\2\2\2\34\35\3\2"+
-		"\2\2\35\36\7\b\2\2\36\37\b\4\1\2\37\7\3\2\2\2 %\5\n\6\2!\"\7\7\2\2\"$"+
+		"\2\2\31\32\7\5\2\2\32\34\5\b\5\2\33\31\3\2\2\2\33\34\3\2\2\2\34\35\3\2"+
+		"\2\2\35\36\7\6\2\2\36\37\b\4\1\2\37\7\3\2\2\2 %\5\n\6\2!\"\7\7\2\2\"$"+
 		"\5\n\6\2#!\3\2\2\2$\'\3\2\2\2%#\3\2\2\2%&\3\2\2\2&\t\3\2\2\2\'%\3\2\2"+
-		"\2()\7\n\2\2)\60\b\6\1\2*\60\7\13\2\2+,\7\4\2\2,-\5\b\5\2-.\7\5\2\2.\60"+
+		"\2()\7\n\2\2)\60\b\6\1\2*\60\7\13\2\2+,\7\b\2\2,-\5\b\5\2-.\7\t\2\2.\60"+
 		"\3\2\2\2/(\3\2\2\2/*\3\2\2\2/+\3\2\2\2\60\13\3\2\2\2\7\17\25\33%/";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());

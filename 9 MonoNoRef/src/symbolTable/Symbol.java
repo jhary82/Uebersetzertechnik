@@ -10,8 +10,16 @@ package symbolTable;
 public class Symbol { // A generic programming language symbol
     String name;      // All symbols at least have a name
     Type type;
-    public Symbol(String name) { this.name = name; }
-    public Symbol(String name, Type type) {this(name); this.type = type;}
+    boolean ref;
+    public Symbol(String name) { 
+    	this.name = name;
+    	this.ref = false;
+    }
+    public Symbol(String name, Type type) {
+    	this(name); 
+    	this.type = type;
+    	this.ref = true;
+    }
     public String getName() { return name; }
     public String toString() {
         if ( type!=null ) return '<'+getName()+":"+type+'>';
