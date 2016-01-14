@@ -343,7 +343,7 @@ public class CymbolParser extends Parser {
 				setState(38);
 				((PrimaryContext)_localctx).ID = match(ID);
 				System.out.println("line "+((PrimaryContext)_localctx).ID.getLine()+": ref to "+
-				    	 symtab.resolve((((PrimaryContext)_localctx).ID!=null?((PrimaryContext)_localctx).ID.getText():null)));
+				    	 symtab.resolve((((PrimaryContext)_localctx).ID!=null?((PrimaryContext)_localctx).ID.getText():null)));symtab.resolve((((PrimaryContext)_localctx).ID!=null?((PrimaryContext)_localctx).ID.getText():null)).ref = true;
 				}
 				break;
 			case INT:

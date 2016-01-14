@@ -40,7 +40,7 @@ expression
 primary
     :   ID // reference variable in an expression
     	{System.out.println("line "+$ID.getLine()+": ref to "+
-    	 symtab.resolve($ID.text));}
+    	 symtab.resolve($ID.text));symtab.resolve($ID.text).ref = true;}    	 
     |   INT
     |   '(' expression ')'
     ;

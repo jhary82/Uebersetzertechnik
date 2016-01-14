@@ -10,7 +10,7 @@ package symbolTable;
 public class Symbol { // A generic programming language symbol
     String name;      // All symbols at least have a name
     Type type;
-    boolean ref;
+    public boolean ref;
     public Symbol(String name) { 
     	this.name = name;
     	this.ref = false;
@@ -18,7 +18,7 @@ public class Symbol { // A generic programming language symbol
     public Symbol(String name, Type type) {
     	this(name); 
     	this.type = type;
-    	this.ref = true;
+    	this.ref = false;
     }
     public String getName() { return name; }
     public String toString() {

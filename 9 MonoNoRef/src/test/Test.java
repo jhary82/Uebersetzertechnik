@@ -24,7 +24,7 @@ public class Test {
         CymbolParser p = new CymbolParser((TokenStream) tokens); // create parser
         SymbolTable symtab = new SymbolTable();    // create symbol table
         p.compilationUnit(symtab);                 // launch parser
-        System.out.println("globals: "+ symtab.symbols);
+        System.out.println("globals: "+ symtab.toString());
         System.out.print("no refs: ");
         for(Symbol s : symtab.noRefs()){
         	System.out.print(s+", ");
